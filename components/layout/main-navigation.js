@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useSession, signOut, signout } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/client';
 
 import classes from './main-navigation.module.css';
 
