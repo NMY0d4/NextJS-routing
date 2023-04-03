@@ -1,3 +1,4 @@
+import { exist } from 'mongodb/lib/gridfs/grid_store';
 import { hashPassword } from '../../../lib/auth';
 import { connectDatabase } from '../../../lib/db';
 
@@ -26,6 +27,12 @@ export default async function handler(req, res) {
 
   const db = client.db();
 
+  const existingUser = await db.collection('users').findOne({ email });
+
+  if (existingUser) {
+    res.status(422).json({ message: 'User exists already!' });
+    return;
+  }
   const hashedPassword = await hashPassword(password);
 
   const result = await db.collection('users').insertOne({
