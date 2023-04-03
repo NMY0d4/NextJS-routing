@@ -5,7 +5,7 @@ import { connectDatabase } from '../../../lib/db';
 
 export default NextAuth({
   session: {
-    jwt: true
+    jwt: true,
   },
   providers: [
     Providers.Credentials({
@@ -28,13 +28,12 @@ export default NextAuth({
         );
 
         if (!isValid) {
-        client.close();
-          throw new error('Could not log you in!');
+          client.close();
+          throw new Error('Could not log you in!');
         }
 
         client.close();
         return { email: user.email, id: user._id };
-
       },
     }),
   ],
