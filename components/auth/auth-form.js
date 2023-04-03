@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import classes from './auth-form.module.css';
+import {signIn} from 'next-auth/client'
 
 async function createUser(email, password) {
   const response = await fetch('/api/auth/signup', {
